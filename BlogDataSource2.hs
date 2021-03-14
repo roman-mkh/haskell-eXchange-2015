@@ -85,6 +85,7 @@ instance DataSource u BlogRequest where
 
 -- -----------------------------------------------------------------------------
 -- Group requests by type
+-- Best implementaion here: https://github.com/facebook/Haxl/tree/master/example/sql
 
 batchFetch :: Connection -> [BlockedFetch BlogRequest] -> IO ()
 batchFetch connection blockedFetches = do
@@ -93,21 +94,6 @@ batchFetch connection blockedFetches = do
   where
     (batchForFetchPosts, batchForFetchContent) = mkBatches blockedFetches
   -- (***)
-
-
-{--
-batchFetch connection = mapM_ $ singleFetch connection
-
-
-singleFetch :: Connection -> BlockedFetch BlogRequest -> IO ()
-singleFetch connection (BlockedFetch FetchPosts resultVar) = do
-  postIds <- sqlGetPostIds connection
-  putSuccess resultVar postIds
-
-singleFetch connection (BlockedFetch (FetchPostContent postId) resultVar) = do
-  content <- sqlGetPostContent connection postId
-  putSuccess resultVar content
---}
 
 batchFetchPosts :: Connection -> [ResultVar [PostId]] -> IO ()
 batchFetchPosts connection [] = return ()
@@ -124,7 +110,8 @@ batchFetchContent connection batches = do
   mapM_ (\(postId, resultVar) -> putSuccess resultVar (fromMaybe "" (Map.lookup postId resMap)) ) batches
   where postIds = fmap fst batches
 
-
+-- probably better collect map
+-- key (Connection -> [BlockedFetch BlogRequest] -> IO ()) value [BlockedFetch BlogRequest]
 type Batches
   = ( [ResultVar [PostId]]              -- FetchPosts
     , [(PostId, ResultVar PostContent)] -- FetchPostContent
