@@ -1,9 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 module BlogDB2 where
 
-import Control.Applicative
 import Database.SQLite.Simple
-import Database.SQLite.Simple.FromRow
+-- import Database.SQLite.Simple.FromRow
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
 import           Data.Time (UTCTime, Day)

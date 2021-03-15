@@ -1,0 +1,12 @@
+# For more information about stack's configuration, see
+# http://docs.haskellstack.org/en/stable/yaml_configuration/
+#
+flags: {}
+
+packages:
+- .
+
+resolver: lts-17.4
+
+extra-deps:
+- haxl-2.3.0.0@sha256:4c9a7371a2c21df910628d582776cf52db72bcd6c808daa02823be0ab06f1eb9,3974

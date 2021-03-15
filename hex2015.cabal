@@ -1,0 +1,36 @@
+cabal-version: 3.0
+
+name:           hex2015
+version:        0.0.0
+build-type:     Simple
+
+library
+  build-depends:
+    base >= 4.10 && < 5,
+    pretty-simple >= 4.0,
+    text-show >= 3.9,
+    text >= 1.2.1.0 && < 1.3,
+    haxl >= 2.3.0.0 && < 2.4,
+    sqlite-simple >= 0.4.18.0,
+    time >= 1.9,
+    bytestring >= 0.10.12,
+    containers >= 0.6.2.1,
+    process >= 1.6.9,
+    async >= 2.2.2,
+    hashable >= 1.3,
+    transformers >= 0.5,
+    http-conduit >= 2.3.7.4,
+    http-client >= 0.6.4.1,
+    http-client-tls >= 0.3.5.3
+
+  hs-source-dirs: .
+
+  default-language: Haskell2010
+
+  ghc-options:
+--    -O2 -fprof-auto
+    -Wall
+    -Wno-type-defaults
+--    -Wno-name-shadowing
+-- :set -fwarn-tabs -fwarn-unused-imports -fwarn-name-shadowing:q
+-- :set -fwarn-incomplete-uni-patterns -fwarn-incomplete-patterns -fwarn-overlapping-patterns

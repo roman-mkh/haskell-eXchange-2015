@@ -25,8 +25,8 @@ myEnv = do
 
 run :: Haxl w a -> IO a
 run h = do
-  env <- myEnv
-  runHaxl env h
+  env1 <- myEnv
+  runHaxl env1 h
 
 runBlog :: IO [PostContent]
 runBlog = run $ getPostIds >>= mapM getPostContent
